@@ -355,12 +355,15 @@ for (var i=0; i<races.length; i++) {
             "birthdate",
             "gender",
             "locale",
-            "hd");
+            "hd",
+            "type");
 
         // console.log(profile);
         user.profile = profile;
         user.suscribed=[];
         user.count= 0;
+        user.type=type;  //0 for user and 1 for admin
+
         return user;
   }
 else if (user.services.facebook !== undefined) {
@@ -371,6 +374,7 @@ else if (user.services.facebook !== undefined) {
     }
     user.suscribed=[];
     user.count= 0;
+    user.type=type;
     return user;
 }
 else if (user.services.twitter !== undefined) {
@@ -379,6 +383,7 @@ else if (user.services.twitter !== undefined) {
     }
     user.suscribed=[];
     user.count= 0;
+    user.type=type;
     return user;
 }
     
