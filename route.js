@@ -71,6 +71,17 @@ Router.map(function() {
     userid=this.params.userid;
      }  });
 
+
+  this.route('hobbyedit', {
+  path: '/admin/:userid/hobbyedit',
+  waitOn:function(){
+            return Meteor.subscribe("hobbylist");
+        },
+  data: function (){
+    return 1; }  });
+
+
+
   this.route('newpost', {
   path: '/:hobbyname/newpost',
   waitOn:function(){
