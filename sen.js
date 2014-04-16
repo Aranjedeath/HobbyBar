@@ -105,27 +105,10 @@ Template.hobbymain.rendered = function() {
 
 
 
-Template.header.settings = {
-  position: 'bottom',
-  limit: 5,  // more than 20, to emphasize matches outside strings *starting* with the filter
-  rules: [
-    {
-      token: '',
-      collection: Meteor.users,  // Meteor.Collection object means client-side collection
-      field: 'profile.name',
-      // set to true to search anywhere in the field, which cannot use an index.
-       // 'ba' will match 'bar' and 'baz' first, then 'abacus'
-      template: Template.details,
-      callback: function(doc) { window.location = '/user/'+doc._id;}
-    }
-  ]
-};
-
 
 Template.contact.rendered = function() {
   $("html,body").animate({scrollTop: 0},500);
 }
-
 
 Template.user.rendered = function() {
   $("html,body").animate({scrollTop: 0},500);
@@ -391,12 +374,12 @@ Template.admin.helpers({
 
  Template.admin.events({
   "click #profile": function(e, tmpl) {
-    $('#profilecontent').show();
-       $('#feedbackcontent').hide();
-   $('#postcontent').hide();
-    $('#commentcontent').hide();
-     $('#hobbycontent').hide();
-       },
+      $('#profilecontent').show();
+      $('#feedbackcontent').hide();
+      $('#postcontent').hide();
+      $('#commentcontent').hide();
+      $('#hobbycontent').hide();
+    },
 
   "click .hobbypage": function(e, tmpl) {
         postlist.stop();
@@ -406,12 +389,16 @@ Template.admin.helpers({
         post=Meteor.subscribe("posthobby",this.hobbyid);
         video=Meteor.subscribe("videohobby",this.hobbyid);
         $('#hobbycontent').show();
-       $('#feedbackcontent').hide();
-   $('#postcontent').hide();
-    $('#commentcontent').hide();
-     $('#profilecontent').hide();
+        $('#feedbackcontent').hide();
+        $('#postcontent').hide();
+        $('#commentcontent').hide();
+        $('#profilecontent').hide();
 
        },
+
+   "click #addhobby": function(e, tmpl) {
+      window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
+    },
 
   "click #drop": function(e, tmpl) {
        if((count%2)==0)
@@ -460,36 +447,33 @@ Template.admin.helpers({
 
        },
     "click #comments": function(e, tmpl) {
-    $('#profilecontent').hide();
-       $('#feedbackcontent').hide();
-   $('#postcontent').hide();
-    $('#commentcontent').show();
-    $('#hobbycontent').hide();
+     $('#profilecontent').hide();
+     $('#feedbackcontent').hide();
+     $('#postcontent').hide();
+     $('#commentcontent').show();
+     $('#hobbycontent').hide();
        }, 
+
+     "click #addnewhobby": function(e, tmpl){
+      $('#profilecontent').hide();
+      $('#feedbackcontent').hide();
+      $('#postcontent').hide();
+      $('#commentcontent').hide();
+      $('#hobbycontent').hide();
+
+     },
 
        //Deleting the post by the admin
     "click #deletepost": function(e, tmpl) {
       $('#postcontent').remove();
       $('#commentcontent').remove();
       Meteor.call('deletepost',this.postid);
-    },
+    }
 
-    //  Dynamically adding a hobby on screen by the admin
-      "click #addnewhobby": function(e, tmpl) {
-        $('#profilecontent').hide();
-       $('#feedbackcontent').hide();
-   $('#postcontent').hide();
-    $('#commentcontent').show();
-    $('#hobbycontent').hide();
-      },
-
-      "click #number_of_users": function(e, tmpl) {
-        $('#profilecontent').hide();
-       $('#feedbackcontent').hide();
-   $('#postcontent').hide();
-    $('#commentcontent').show();
-    $('#hobbycontent').hide();
-      }
+      //Dynamically adding a hobby on screen by the admin
+      /*"click #addhobby": function(e, tmpl) {
+        Meteor.call('addhobby',this.hobbyid);
+      }*/
        
    });
 
@@ -708,6 +692,16 @@ Template.displayvideo.events({            // check this once  -----Roshni
 
    });
 
+//-------------------------------------------
+
+  Template.hobbyedit.rendered = function() {
+    $("html,body").animate({scrollTop: 0},500);
+  }
+
+  /*Template.hobby_edit.events({
+  "click #addnewhobby": function(e, tmpl) {
+    
+   });*/  
 //---------------------------
 
   Template.newpost.events({
@@ -902,11 +896,7 @@ Template.displayvideo.events({            // check this once  -----Roshni
      }
       else
       {  
-        //return _.contains(this.likeusers,Meteor.userId());
-        if(this.likeusers.length>0)
-          return true;
-        else
-          return false;
+      return _.contains(Posts.findOne().likeusers,Meteor.userId());
        }
     },
 
@@ -935,20 +925,6 @@ Template.displayvideo.events({            // check this once  -----Roshni
     vidcomments : function(){
 
       return Videocomments.find();
-    },
-    checklike1: function() {
-      if(Videoposts.findOne()==undefined)
-      {
-       return false;
-     }
-      else
-      {  
-        //return _.contains(this.likeusers,Meteor.userId());
-        if(this.likeusers.length>0)
-          return true;
-        else
-          return false;
-       }
     },
 
   })
@@ -990,13 +966,6 @@ Template.displayvideo.events({            // check this once  -----Roshni
        },
   "click #like": function(e, tmpl) {
     Meteor.call('likevideo',this._id,Meteor.userId());
-       },
-  "click #unlike1": function(e, tmpl) {
-   
-    Meteor.call('unlikevideocomment',this._id,Meteor.userId());
-       },
-  "click #like1": function(e, tmpl) {
-    Meteor.call('likevideocomment',this._id,Meteor.userId());
        },
   "click #delete": function(e, tmpl) {
      var answer=confirm("Are you sure you want to delete this post?");
@@ -1058,8 +1027,8 @@ Template.displayvideo.events({            // check this once  -----Roshni
   "click #logout": function(e, tmpl) {
 
     Meteor.logout();
-       },
-   "click #profile": function(e, tmpl) {
+   },
+  "click #profile": function(e, tmpl) {
         window.location = '/user/'+Meteor.userId();
     
        }
@@ -1140,7 +1109,19 @@ Template.displayvideo.events({            // check this once  -----Roshni
 
 
 
-  
+  Template.test.events({
+  "click #hi": function(e, tmpl){
+          /* alert("you clicked");
+            $("#div1").fadeIn();
+    $("#div2").fadeIn("slow");
+    $("#div3").fadeIn("slow");*/
+         $('html, body').animate({
+        scrollTop: $("#div5").offset().top+230
+    }, 1000);
+          
+        },
+
+     });
 
  
 
