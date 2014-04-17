@@ -1,8 +1,10 @@
 <template name="hobbyedit">
       <div class="hobbynew">
-        <div class="newhobbyform" style=" align:center">
-            <h1 class="p-heading">Create a Hobby!</h1>
-            <div>
+
+
+        <div class="newhobbyform">
+            <h1 class="h-heading">Create a Hobby!</h1>
+            <div class="hobbyinner">
                 <form>
             
                 <p>Hobby ID: </p> <input type="text" name="hobbyid"><br>
@@ -10,10 +12,13 @@
                 <p>Hobby Name: </p> <input type="text" name="hobbyname"><br>
                 
                 <p>Description:</p> <textarea id="hobbydes" type="text"  class="hobbydescrip"></textarea>
+                <br>
+
+                <p>Your image:</p> <input type="file" name="pic" id="pic"><br>
 
                 </form>
                 
-                <div style="position : absolute;left:50px">
+                <div style="position:absolute; left:50px">
                     <button type="button"  id="post" class="btn btn-default" >Create Hobby!</button>
                 </div>
 
