@@ -52,7 +52,10 @@
                       </li>
 
                       <li>
-                       <img style="height: 50px; padding-top:10px" src="{{currentUser.profile.picture}}" />
+
+                      <img style="height: 50px; padding-top:10px" src="{{currentUser.profile.picture}}" />
+
+                      
                       </li>
                       <li>
                         <a id="profile">{{currentUser.profile.name}}</a>
@@ -127,7 +130,6 @@
                     </a>
                  
                     <a class="btn-google" id="logingoogle" onClick="Meteor.loginWithGoogle({
-                
                 requestPermissions: ['email']
                 //Meteor.users.update({_id:Meteor.userId()}, {$inc:{count: 1}});
             }, function (err) {
