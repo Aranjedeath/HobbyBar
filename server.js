@@ -75,6 +75,12 @@ if (Meteor.isServer) {
     
 
   },
+
+  createnewhobby:function(x1,x2,x3)
+  {
+    Hobbies.insert({hobbyid:x1,hobbyname:x2,description:x3});
+  },
+
   updatepost:function(postid,topic,data)
   {
      showChartopic=30;

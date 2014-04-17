@@ -589,7 +589,35 @@ Template.admin.admindb = function() {
 
 
 
+Template.hobbyedit.events({
+  "click #post": function(e, tmpl) {
+    e.preventDefault();
+    
+    var x1=$('#newhobbyid').val();
+    var x2=$('#newhobbyname').val();
+    var x3=$('#hobbydes').val();
 
+        if (x1==null || x1=="")
+         {
+          bootbox.alert("<h3>No ID of hobby found!!</h3>", function() {
+          });
+           return false;
+         }
+
+         if(x2==null || x2=="")
+        {
+          bootbox.alert("<h3>No hobby name` found!!</h3>", function() {
+          });
+          
+          return false;
+        }
+
+          Meteor.call("createnewhobby",x1,x2,x3); 
+          window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
+          return true;
+
+      }
+})
 
 Template.displaypost.rendered = function() {
   $("html,body").animate({scrollTop: 0},500);
