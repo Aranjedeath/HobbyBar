@@ -735,7 +735,9 @@ left:100px;
   padding-left: -30px;
 }
 
-  .hobbynew{
+/*////////////for hobby edit///////////////*/
+.hobbynew{
+
   margin-left: 220px;
   left: 100px;
   width: 600px;
@@ -745,8 +747,7 @@ left:100px;
   height: 100%;
   border-radius: 0;
   border: none;
-  background-color: #000000;
+  background-color: #ffffff;
   overflow-y: hidden;
-  color: #FFFFFF;
-  }
-  
+  color: #000000;
+}

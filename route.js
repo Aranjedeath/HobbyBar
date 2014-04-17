@@ -92,11 +92,13 @@ Router.map(function() {
     return Hobbies.findOne({name: hobbyname}); }  });
 
   
-
-
-
-  
-
+this.route('hobbyedit', {
+path: '/admin/:userid/hobbyedit',
+waitOn:function(){
+          return Meteor.subscribe("hobbylist");
+      },
+data: function (){
+  return 1; }  });
 
 
   this.route('newvideopost', {

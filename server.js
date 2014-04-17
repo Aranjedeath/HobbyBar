@@ -1,3 +1,6 @@
+
+
+
 if (Meteor.isServer) {
 
   Meteor.methods({
@@ -216,15 +219,16 @@ if (Meteor.isServer) {
   },
   addcomment: function(postid,comment){    
   var pic=0;
-  var pictwitter=0;
-
-   Meteor.users.find({_id:Meteor.userId()}).forEach(function(myDoc) {pic=myDoc.profile.picture});
+  var pictwitter=0;   
+  
+  Meteor.users.find({_id:Meteor.userId()}).forEach(function(myDoc) {pic=myDoc.profile.picture});
   /* Meteor.users.find({_id:Meteor.userId()}).forEach(function(myDoc) {pictwitter=myDoc.services.twitter.profile_image_url});
    if(pic==undefined)
      pic=pictwitter;*/
                   // please check ----Roshni
 
-Comments.insert({postid:postid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf())});
+  Comments.insert({postid:postid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf())});
+
   },
    addvidcomment: function(videoid,comment){    
   var pic=0;
