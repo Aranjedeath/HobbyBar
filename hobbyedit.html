@@ -22,6 +22,30 @@
                     <button type="button"  id="post" class="btn btn-default" >Create Hobby!</button>
                 </div>
 
+                
+            <ul class="thumbnails">
+
+
+              {{#each hobbies}}
+              <li class="span4">
+                <div class="thumbnail">
+                  <a href="/{{name}}/main" class="btn"><img src="{{imagesrc}}" alt="product name"></a>
+                  <div class="caption">
+                    <h3 class="font-clr">{{name}}</h3>
+                   
+                  </div>
+                  <div class="widget-footer">
+                    <p>
+                     
+                      <!--add link here-->
+                      <a href="/{{name}}/main" class="btn">Read more</a>
+                    </p>
+                    </div>
+                </div>
+              </li>
+              {{/each}}
+             </ul>
+
             </div>
         </div>
       </div>
