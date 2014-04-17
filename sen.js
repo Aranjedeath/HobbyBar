@@ -11,7 +11,9 @@ Words = new Meteor.Collection(null);
   Words.insert({type: word})
 });
 
-
+Images = new FS.Collection("images", {
+  stores: [new FS.Store.FileSystem("images", {path: "~/HobbyBar/public/images/hobbies"})]
+});
 
 
 
@@ -119,6 +121,7 @@ Template.header.settings = {
     }
   ]
 };
+
 
 Template.displaypost.settings = {
   position: 'bottom',
@@ -590,6 +593,15 @@ Template.admin.admindb = function() {
 
 
 Template.hobbyedit.events({
+  'change #pic': function(event, template) {
+      FS.Utility.eachFile(event, function(file) {
+      Images.insert(file, function (err, fileObj) {
+        //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+       });
+      });
+    },
+
+
   "click #post": function(e, tmpl) {
     e.preventDefault();
     
@@ -907,10 +919,18 @@ Template.displayvideo.events({            // check this once  -----Roshni
     $("html,body").animate({scrollTop: 0},500);
   }
 
-  /*Template.hobby_edit.events({
-  "click #addnewhobby": function(e, tmpl) {
+  Template.hobbyedit.events({
+   
     
-   });*/  
+   }); 
+
+  Template.home.helpers({
+   
+    hobbies: function() {
+      return Hobbies.find();
+    
+    }
+  })
 //---------------------------
 
   Template.newpost.events({
