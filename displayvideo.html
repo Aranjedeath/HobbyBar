@@ -31,9 +31,10 @@
          <img style="height: 50px" src=" {{services.twitter.profile_image_url}}" />
         </div>
         <div>
-            
-            <textarea id="vdata" type="text"  class="q-descrip" style="margin-left:0px;width:400px;height:40px"></textarea>
 
+            {{#textareaAutocomplete settings=settings id="vdata" type="text"  class="q-descrip" style="margin-left:0px;width:400px;height:40px"}}
+            
+            {{/textareaAutocomplete}}
             <br/>
         </div>
 <div style="width:100%;padding-right:50px"><button id="comment" style="float:right;margin-right:50px">Comment</button></div>
@@ -42,7 +43,8 @@
         <div style="width:100%;float:left">
          {{#each vidcomments}}
               <a href="/user/{{userid}}"><img style="height: 50px;margin-right:20px" src="{{pic}}" /></a>
-          {{comment}}
+              <a href="/user/{{userid}}">{{username}}</a>
+            {{>videocomment }}
 
         
         <div style="width:100%;padding-right:50px;padding-top:15px"> 
@@ -72,6 +74,10 @@
        </div>
      </div> 
     </div>
+</template>
+
+<template name="videocomment">
+<div class="commentr">{{comment}}</div>
 </template>
 
 

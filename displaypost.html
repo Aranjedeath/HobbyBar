@@ -1,5 +1,5 @@
 <template name="displaypost">
-    <div style="background: url('../images/n1.jpeg');background-size: cover;width:100%;background-attachment:fixed;position:absolute;top:-1em;" >
+    <div style="background: url('../images/n1.jpeg');background-size: cover;width:100%;background-attachment:fixed;position:absolute;top:-1em;"  >
        <div class="cover" style="margin-top:125px">
       <div style="padding-left:130px; padding-right:130px">
         
@@ -31,19 +31,25 @@
          <img style="height: 50px" src=" {{services.twitter.profile_image_url}}" />
         </div>
         <div>
+            {{#textareaAutocomplete settings=settings id="data" type="text"  class="q-descrip" style="margin-left:0px;width:400px;height:40px"}}
             
-            <textarea id="data" type="text"  class="q-descrip" style="margin-left:0px;width:400px;height:40px"></textarea>
-
+            {{/textareaAutocomplete}}
             <br/>
         </div>
-<div style="width:100%;padding-right:50px"><button id="comment" style="float:right;margin-right:50px">Comment</button></div>
+
+       <div style="width:100%;padding-right:50px"><button id="comment" style="float:right;margin-right:50px">Comment</button></div>
+
+    
 <br/>
         <h4>Comment</h4>
         <div style="width:100%;float:left">
+
          {{#each comments}}
          
               <a href="/user/{{userid}}"><img style="height: 50px;margin-right:20px" src="{{pic}}" /></a>
-          {{comment}}
+              <a href="/user/{{userid}}">{{username}}</a>
+          
+          {{>comment }}
          
 
           <div style="width:100%;padding-right:50px;padding-top:15px"> 
@@ -77,3 +83,6 @@
     </div>
 </template>
 
+<template name="comment">
+<div class="commentr">{{comment}}</div>
+</template>

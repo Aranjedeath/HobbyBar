@@ -7,6 +7,8 @@ body, html {
 }
 
 
+
+
 .correctbutton{
   visibility: hidden;
 }
@@ -762,3 +764,13 @@ left:100px;
     color: #000000;
 
 }
+
+/*/////////////////notifier///////////////////////*/
+#notifier {
+  border: 1px solid green ;
+  }
+#notification{
+z-index:5;
+}
+}
+

@@ -30,18 +30,34 @@
                 
                 {{#if currentUser}}
                 <!--enter signin page url-->
+                {{#if nousername}}
+                    <p></p>
+                {{/if}}
                   {{#if loggingIn}}
                         <li><a>Logging in...</a></li>
                   {{else}}
+                  
                       <li>
-      
-                            <img style="height: 50px; padding-top:10px" src="{{currentUser.profile.picture}}" />
-                            <img style="height: 50px ; padding-top:10px" src=" {{currentUser.services.twitter.profile_image_url}}" />
-           
+                        
+                        <a id="notification" ><i class="fa fa-globe fa-2x"></i></a>
+                          <div class="hide" id="notifier" >
+                            Display All Notifications <br>
+                            Clear Notifications
+                            {{#if clickGlobe}}
+                            <!--Show notifications-->
+                            {{/if}}
+                          </div>
+                        
+                      
+                      </li>
+
+                      <li>
+                       <img style="height: 50px; padding-top:10px" src="{{currentUser.profile.picture}}" />
                       </li>
                       <li>
                         <a id="profile">{{currentUser.profile.name}}</a>
                       </li>
+                      
                       <li>
                         <a href="/" id="logout">Logout</a>
                       </li>
@@ -68,13 +84,15 @@
                 if(err) {
                         
                 } else {
+                
+
                     window.location.href = '/user/'+Meteor.userId();
-                    box.modal('hide');
+                    
                     Meteor.call('incrementcount',Meteor.userId(),function(error, affectedDocs) {
                      if (error) {
                             console.log(error.message);
                      } else {
-                         // Do whatever
+                         
                             }
                      });
                 }
@@ -117,6 +135,7 @@
                         
                 } else {
                     window.location.href = '/user/'+Meteor.userId();
+                  
                     box.modal('hide');
                     Meteor.call('incrementcount',Meteor.userId(),function(error, affectedDocs) {
                      if (error) {

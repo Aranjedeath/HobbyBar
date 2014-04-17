@@ -70,6 +70,10 @@ if (Meteor.isServer) {
        
           
     Posts.insert({hobbyid:hobbyid,data:data,stopic:stopic,sdata:sdata,topic:topic,userid:Meteor.userId(),likes:1,likeusers:[Meteor.userId()],timestamp:new Date(),timeval:((new Date).valueOf())});
+     
+
+    
+
   },
   updatepost:function(postid,topic,data)
   {
@@ -84,6 +88,9 @@ if (Meteor.isServer) {
   deletepost:function(postid){
     Posts.remove({_id:postid});
     //remove the corresponding comments
+  },
+  addusername:function(username,userid){
+    Meteor.users.update({_id:userid},{$set:{'profile.username':username}});
   },
   deletevideo:function(videoid){
     Videoposts.remove({_id:videoid});
@@ -168,6 +175,35 @@ if (Meteor.isServer) {
         return "Update Successful";
       }
     });
+    var id;
+    Posts.find({_id:postid}).forEach(function(myDoc) {id=myDoc.userid});
+    if(Notifier.find({userid:id,postid:postid,post:true,like:true}).count()==0)
+    {
+
+       Notifier.insert({userid:id,postid:postid,post:true,comment:false,like:true,tag:false,unchecked:1,checked:0,lastliked:Meteor.userId(),timestamp:((new Date).valueOf())});
+    }
+    else
+    {
+      Notifier.update({
+      _id: id,postid:postid
+    }, {
+      
+      $set: {lastliked:userid},
+      $set: {timeval:((new Date).valueOf())},
+      $inc:{unchecked:1}
+      
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    });
+    }
+
+
+
+
   },
   like1 :function(commentid,userid){     // Roshni
     Comments.update({
@@ -216,8 +252,36 @@ if (Meteor.isServer) {
         return "Update Successful";
       }
     });
-  },
-  addcomment: function(postid,comment){    
+    var id;
+    Videoposts.find({_id:postid}).forEach(function(myDoc) {id=myDoc.userid});
+    if(Notifier.find({userid:id,postid:postid,post:false,like:true}).count()==0)
+    {
+
+       Notifier.insert({userid:id,postid:postid,post:false,comment:false,like:true,tag:false,unchecked:1,checked:0,lastliked:Meteor.userId(),timestamp:((new Date).valueOf())});
+    }
+    else
+    {
+      Notifier.update({
+      _id: id,postid:postid
+    }, {
+      
+      $set: {lastliked:userid},
+      $set: {timeval:((new Date).valueOf())},
+      $inc:{unchecked:1}
+      
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    }); 
+
+   }
+ },
+
+
+  addcomment: function(postid,comment,usertags){    
   var pic=0;
   var pictwitter=0;   
   
@@ -226,11 +290,39 @@ if (Meteor.isServer) {
    if(pic==undefined)
      pic=pictwitter;*/
                   // please check ----Roshni
+        //    comment=      comment.replace(/@([^ ]+)/g, '<a href="/user/$1"><b>@$1</b></a>');
 
-  Comments.insert({postid:postid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf())});
 
+  
+Comments.insert({postid:postid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf()),usertags:usertags});
+    
+    var id;
+    Posts.find({_id:postid}).forEach(function(myDoc) {id=myDoc.userid});
+    if(Notifier.find({userid:id,postid:postid,post:true,comment:true}).count()==0)
+    {
+
+       Notifier.insert({userid:id,postid:postid,post:true,comment:true,like:false,tag:false,unchecked:1,checked:0,lastliked:null,timestamp:((new Date).valueOf())});
+    }
+    else
+    {
+      Notifier.update({
+      _id: id,postid:postid
+    }, {
+      
+      
+      $set: {timeval:((new Date).valueOf())},
+      $inc:{unchecked:1}
+      
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    });
+    }
   },
-   addvidcomment: function(videoid,comment){    
+   addvidcomment: function(videoid,comment,usertags){    
   var pic=0;
   var pictwitter=0;
 
@@ -240,7 +332,41 @@ if (Meteor.isServer) {
      pic=pictwitter;*/
                   // please check ----Roshni
 
-Videocomments.insert({videoid:videoid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf())});
+Videocomments.insert({videoid:videoid,comment:comment,userid:Meteor.userId(),pic:pic,likes:0,likeusers:[],timestamp:new Date(),timeval:((new Date).valueOf()),usertags:usertags});
+  
+    var id;
+    Videoposts.find({_id:postid}).forEach(function(myDoc) {id=myDoc.userid});
+    if(Notifier.find({userid:id,postid:postid,post:false,comment:true}).count()==0)
+    {
+
+       Notifier.insert({userid:id,postid:postid,post:false,comment:true,like:false,tag:false,unchecked:1,checked:0,lastliked:null,timestamp:((new Date).valueOf())});
+    }
+    else
+    {
+      Notifier.update({
+      _id: id,postid:postid
+    }, {
+      
+      
+      $set: {timeval:((new Date).valueOf())},
+      $inc:{unchecked:1}
+      
+    }, function(error, affectedDocs) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+      } else {
+        return "Update Successful";
+      }
+    });
+    }
+
+
+
+
+
+
+
+
   },
   getpostpages: function (hobbyname) { 
     
@@ -359,7 +485,7 @@ for (var i=0; i<races.length; i++) {
 });
   Accounts.onCreateUser(function (options, user) {
      
-   
+  
 
     if (user.services.google !== undefined) {
       var accessToken = user.services.google.accessToken,
@@ -390,8 +516,9 @@ for (var i=0; i<races.length; i++) {
             "locale",
             "hd");
 
-        
         user.profile = profile;
+        user.profile.username=null;
+
         user.suscribed=[];
         user.count= 0;
         return user;
@@ -403,6 +530,7 @@ else if (user.services.facebook !== undefined) {
         
     }
     user.suscribed=[];
+     user.profile.username=null;
     user.count= 0;
     return user;
 }
@@ -410,7 +538,10 @@ else if (user.services.twitter !== undefined) {
     if (options.profile) {
         user.profile = options.profile;
     }
+    user.profile.picture=user.services.twitter.profile_image_url;
+    user.profile.email=user.services.twitter.email;
     user.suscribed=[];
+    user.profile.username=null;
     user.count= 0;
     return user;
 }
