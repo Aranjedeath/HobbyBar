@@ -54,6 +54,7 @@
         "git": "https://github.com/mizzao/meteor-autocomplete.git",
         "tag": "v0.3.0",
         "commit": "3130f6911e3ece890532be7c669b1ffa42dbb097"
+      },
 
       "collectionFS": {
         "git": "https://github.com/CollectionFS/Meteor-CollectionFS.git",
@@ -87,6 +88,7 @@
         "tag": "v2.0.0",
         "commit": "636819c9de59f66410e148867b229869bb045cea"
 
+      },
       "cfs-base-package": {
         "git": "https://github.com/CollectionFS/Meteor-cfs-base-package.git",
         "tag": "v0.0.22",
