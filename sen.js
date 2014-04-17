@@ -401,11 +401,9 @@ Template.admin.helpers({
 
        },
 
-
    "click #addhobby": function(e, tmpl) {
       window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
     },
-
 
   "click #drop": function(e, tmpl) {
        if((count%2)==0)

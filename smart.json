@@ -7,6 +7,10 @@
     "font-awesome": {},
     "jquery-ui": {},
     "moment": {},
+<<<<<<< Updated upstream
     "autocomplete": {}
+=======
+    "collectionFS": {}
+>>>>>>> Stashed changes
   }
 }

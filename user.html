@@ -34,7 +34,7 @@
 
                 {{/each}}
               </ul>
-            </li>
+      </li>
       <li>
               <a href="#" id="dropall" class="holo"><i class="fa fa-caret-square-o-down"></i> All Hobbies</a>
               <ul id="dropdownall" class="holo">
@@ -89,11 +89,11 @@
             <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <a href="#">{{currentUser.profile.name}}</a>
- 				<p> Here we are</p>
-			{{currentUser.profile.name}}
+ 				      <p> Here we are</p>
+			        {{currentUser.profile.name}}
             </div>
           </div>
-        </div>
+       </div>
 
 
 
@@ -111,16 +111,16 @@
       <ul>
 
 
-    {{#each filterpost}}
-    <li>
+       {{#each filterpost}}
+       <li>
 
-    <a href="/Posts/{{_id}}">
-      <h2 class="ellipsis"><div class="headermore">{{stopic}}</div></h2>
-      <p class="ellipsis"><div class="more">{{sdata}}</div></p>
-    </a>
-   </li>
-  {{/each}}
-  </ul>   
+         <a href="/Posts/{{_id}}">
+           <h2 class="ellipsis"><div class="headermore">{{stopic}}</div></h2>
+           <p class="ellipsis"><div class="more">{{sdata}}</div></p>
+         </a>
+       </li>
+       {{/each}}
+      </ul>   
 
     </div>
 
@@ -149,44 +149,39 @@
             <ol class="breadcrumb">
               <li class="active"><i class="fa fa-dashboard"></i>Posts</li>
             </ol>
-            
+             <div class="posts" id="posts">
+              <ul>
+              {{#each filterpost}}
+              <li>
 
-                 <div class="posts" id="posts">
-      
-      <ul>
+               <a href="/Posts/{{_id}}">
+                <h2 class="ellipsis"><div class="headermore">{{stopic}}</div></h2>
+                <p class="ellipsis"><div class="more">{{sdata}}</div></p>
+               </a>
+              </li>
+              {{/each}}
+             </ul>   
 
+            </div>
 
-    {{#each filterpost}}
-    <li>
-
-    <a href="/Posts/{{_id}}">
-      <h2 class="ellipsis"><div class="headermore">{{stopic}}</div></h2>
-      <p class="ellipsis"><div class="more">{{sdata}}</div></p>
-    </a>
-   </li>
-  {{/each}}
-  </ul>   
-
-    </div>
-
-    <div class="videoposts">
-      <ul>
+           <div class="videoposts">
+           <ul>
 
 
-   {{#each filtervideopost}}
-    <li>
-    <a href="/Videopost/{{_id}}">
-      <h2><div class="headermore">{{stopic}}</div></h2>
-      <img src='{{picurl}}'/>
-    </a>
-   </li>
-  {{/each}}
-  </ul>   
+           {{#each filtervideopost}}
+           <li>
+            <a href="/Videopost/{{_id}}">
+            <h2><div class="headermore">{{stopic}}</div></h2>
+            <img src='{{picurl}}'/>
+            </a>
+           </li>
+           {{/each}}
+           </ul>   
 
-</div>
-            
           </div>
-        </div>
+            
+         </div>
+       </div>
 
         
 
@@ -217,10 +212,8 @@
 
         
         </div>
-
     </div>
  
-
 </body>
 
     
