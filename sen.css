@@ -742,13 +742,29 @@ left:100px;
 
   margin-left: 220px;
   left: 100px;
-  width: 600px;
-  padding:50px;
-  position: fixed;
+  width: 800px;
+  padding:30px;
+  position: relative;
   top: 70px;
-  height: 100%;
-  border-radius: 0;
-  border: none;
+  height: 500px;
+  border-radius: 1px;
+  background-color: #ffffff;
+  overflow-y: hidden;
+  color: #000000;
+  display:-webkit-box;
+  -webkit-box-orient:horizontal;
+}
+
+.deletehobbyform{
+
+  margin-left: 50px;
+  left: 50px;
+  width: 300px;
+  padding:50px 0px 50px 50px;
+  position: relative;
+  top: 0px;
+  height: 200px;
+  border: 1.5px solid red;
   background-color: #ffffff;
   overflow-y: hidden;
   color: #000000;

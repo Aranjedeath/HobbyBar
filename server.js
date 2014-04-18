@@ -76,9 +76,9 @@ if (Meteor.isServer) {
 
   },
 
-  createnewhobby:function(x1,x2,x3)
+  createnewhobby:function(x1,x2,x3,x4)
   {
-    Hobbies.insert({hobbyid:x1,hobbyname:x2,description:x3});
+    Hobbies.insert({hobbyid:x1,name:x2,description:x3,imagesrc:x4});
   },
 
   updatepost:function(postid,topic,data)

@@ -593,7 +593,7 @@ Template.admin.admindb = function() {
 
 
 Template.hobbyedit.events({
-  'change #pic': function(event, template) {
+  'change #pic': function(e, tmpl) {
       FS.Utility.eachFile(event, function(file) {
       Images.insert(file, function (err, fileObj) {
         //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
@@ -605,9 +605,13 @@ Template.hobbyedit.events({
   "click #post": function(e, tmpl) {
     e.preventDefault();
     
-    var x1=$('#newhobbyid').val();
+    var x1=parseInt($('#newhobbyid').val());
     var x2=$('#newhobbyname').val();
     var x3=$('#hobbydes').val();
+    var path=$('#pic').val();
+    var x4= "./images/hobbies/"+ path.split('\\')[2];
+    var x = "Hello"
+    alert(x4);
 
         if (x1==null || x1=="")
          {
@@ -624,7 +628,35 @@ Template.hobbyedit.events({
           return false;
         }
 
-          Meteor.call("createnewhobby",x1,x2,x3); 
+          Meteor.call("createnewhobby",x1,x2,x3,x4); 
+          window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
+          return true;
+
+      },
+           
+
+  "click #deletepost": function(e, tmpl) {
+    e.preventDefault();
+    
+    var x1=parseInt($('#newhobbyid').val());
+    var x2=$('#newhobbyname').val();
+
+        if (x1==null || x1=="")
+         {
+          bootbox.alert("<h3>No ID of hobby found!!</h3>", function() {
+          });
+           return false;
+         }
+
+         if(x2==null || x2=="")
+        {
+          bootbox.alert("<h3>No hobby name` found!!</h3>", function() {
+          });
+          
+          return false;
+        }
+
+          Meteor.call("createnewhobby",x1,x2,x3,x4); 
           window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
           return true;
 
@@ -919,10 +951,6 @@ Template.displayvideo.events({            // check this once  -----Roshni
     $("html,body").animate({scrollTop: 0},500);
   }
 
-  Template.hobbyedit.events({
-   
-    
-   }); 
 
   Template.home.helpers({
    

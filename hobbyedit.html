@@ -1,52 +1,47 @@
 <template name="hobbyedit">
       <div class="hobbynew">
 
-
+        <h1 class="h-heading">Create a Hobby!</h1>
         <div class="newhobbyform">
-            <h1 class="h-heading">Create a Hobby!</h1>
+            
             <div class="hobbyinner">
                 <form>
             
-                <p>Hobby ID: </p> <input id="newhobbyid" type="text" name="hobbyid"><br>
+                <p>Hobby ID: </p> <input id="newhobbyid" type="number" name="hobbyid"><br/>
 
-                <p>Hobby Name: </p> <input id="newhobbyname" type="text" name="hobbyname"><br>
+                <p>Hobby Name: </p> <input id="newhobbyname" type="text" name="hobbyname"><br/>
                 
                 <p>Description:</p> <textarea id="hobbydes" type="text"  class="hobbydescrip"></textarea>
                 <br>
 
-                <p>Your image:</p> <input type="file" name="pic" id="pic"><br>
+                
 
+                <p>Hobby image:</p> <input type="file" name="pic" id="pic"><br>
+                
                 </form>
                 
                 <div class="createhobby" style="position:absolute; left:50px">
                     <button type="button"  id="post" class="btn btn-default" >Create Hobby!</button>
                 </div>
 
-                
-            <ul class="thumbnails">
-
-
-              {{#each hobbies}}
-              <li class="span4">
-                <div class="thumbnail">
-                  <a href="/{{name}}/main" class="btn"><img src="{{imagesrc}}" alt="product name"></a>
-                  <div class="caption">
-                    <h3 class="font-clr">{{name}}</h3>
-                   
-                  </div>
-                  <div class="widget-footer">
-                    <p>
-                     
-                      <!--add link here-->
-                      <a href="/{{name}}/main" class="btn">Read more</a>
-                    </p>
-                    </div>
-                </div>
-              </li>
-              {{/each}}
-             </ul>
-
             </div>
+
+            <div class="deletehobbyform">
+
+                <form>
+
+                    <p>Hobby ID: </p> <input id="delhobbyid" type="number" name="hobbyid"><br/>
+
+                    <p>Hobby Name: </p> <input id="delhobbyname" type="text" name="hobbyname"><br/>
+
+                </form>
+           
+                <div class="deletehobby" style="position:absolute; left:50px">
+                    <button type="button"  id="deletepost" class="btn btn-default" >Delete Hobby!</button>
+                </div>
+
+             </div>
+            
         </div>
       </div>
 </template>
