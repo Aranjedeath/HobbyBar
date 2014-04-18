@@ -81,6 +81,11 @@ if (Meteor.isServer) {
     Hobbies.insert({hobbyid:x1,name:x2,description:x3,imagesrc:x4});
   },
 
+  deletehobby:function(x1,x2)
+  {
+    Hobbies.remove({hobbyid:x1,name:x2});
+  },
+
   updatepost:function(postid,topic,data)
   {
      showChartopic=30;

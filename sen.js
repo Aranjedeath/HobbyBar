@@ -608,9 +608,10 @@ Template.hobbyedit.events({
     var x1=parseInt($('#newhobbyid').val());
     var x2=$('#newhobbyname').val();
     var x3=$('#hobbydes').val();
-    var path=$('#pic').val();
-    var x4= "./images/hobbies/"+ path.split('\\')[2];
-    var x = "Hello"
+    var temp = $('#hobbyimg').val();
+    //var path=$('#pic').val();
+    //var x4= "./images/hobbies/"+ path.split('\\')[2];
+    var x4 = "./images/hobbies/" + temp;
     alert(x4);
 
         if (x1==null || x1=="")
@@ -638,8 +639,8 @@ Template.hobbyedit.events({
   "click #deletepost": function(e, tmpl) {
     e.preventDefault();
     
-    var x1=parseInt($('#newhobbyid').val());
-    var x2=$('#newhobbyname').val();
+    var x1=parseInt($('#delhobbyid').val());
+    var x2=$('#delhobbyname').val();
 
         if (x1==null || x1=="")
          {
@@ -656,7 +657,7 @@ Template.hobbyedit.events({
           return false;
         }
 
-          Meteor.call("createnewhobby",x1,x2,x3,x4); 
+          Meteor.call("deletehobby",x1,x2); 
           window.location = '/admin/'+Meteor.userId()+'/hobbyedit';
           return true;
 
